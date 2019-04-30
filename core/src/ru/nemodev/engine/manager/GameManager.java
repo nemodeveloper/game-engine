@@ -89,7 +89,7 @@ public final class GameManager
                         if (newGameCount == 2)
                         {
                             newGameCount = 0;
-                            AppServiceManager.getInstance().getAdbService().showFullScreenBanner();
+                            AppServiceManager.getInstance().getAdsService().showFullScreenBanner();
                         }
                     }
                     return true;

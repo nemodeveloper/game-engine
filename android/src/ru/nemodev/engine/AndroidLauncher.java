@@ -7,14 +7,16 @@ import android.view.View;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.crashlytics.android.Crashlytics;
+import com.google.android.gms.ads.AdView;
 
 import io.fabric.sdk.android.Fabric;
-import ru.nemodev.engine.R;
+import ru.nemodev.engine.service.AndroidAdsService;
+import ru.nemodev.engine.service.AndroidPlayService;
 
 public class AndroidLauncher extends AndroidApplication
 {
 	private AndroidPlayService androidPlayService;
-	private AndroidAdbService androidAdbService;
+	private AndroidAdsService androidAdbService;
 
 	@Override
 	protected void onCreate (Bundle savedInstanceState)
@@ -74,10 +76,8 @@ public class AndroidLauncher extends AndroidApplication
 
 	private void initAdb()
 	{
-		androidAdbService = new AndroidAdbService(this);
-//		MobileAds.initialize(this, getResources().getString(R.string.ads_app_id));
-//		AdView adView = findViewById(R.id.adView);
-//		adView.loadAd(new AdRequest.Builder().build());
+		AdView adView = findViewById(R.id.adView);
+		androidAdbService = new AndroidAdsService(this, adView, true);
 	}
 
 	private void initFabricIO()

@@ -7,17 +7,17 @@ import ru.nemodev.engine.core.manager.resource.FontManager;
 import ru.nemodev.engine.core.manager.resource.PhysicManager;
 import ru.nemodev.engine.core.manager.resource.ResourceLoader;
 import ru.nemodev.engine.core.manager.system.AppServiceManager;
-import ru.nemodev.engine.core.service.AdbService;
+import ru.nemodev.engine.core.service.AdsService;
 import ru.nemodev.engine.core.service.PlayService;
 import ru.nemodev.engine.screen.load.SplashScreen;
 
 
 public final class GameApp extends BaseGame
 {
-	public GameApp(PlayService playService, AdbService adbService)
+	public GameApp(PlayService playService, AdsService adsService)
 	{
 		AppServiceManager.getInstance().setPlayService(playService);
-		AppServiceManager.getInstance().setAdbService(adbService);
+		AppServiceManager.getInstance().setAdsService(adsService);
 	}
 
 	@Override

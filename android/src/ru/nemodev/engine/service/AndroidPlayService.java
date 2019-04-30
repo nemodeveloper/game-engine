@@ -1,4 +1,4 @@
-package ru.nemodev.engine;
+package ru.nemodev.engine.service;
 
 import android.app.Activity;
 import android.content.Intent;
