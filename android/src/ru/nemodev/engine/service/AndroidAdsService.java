@@ -44,7 +44,10 @@ public class AndroidAdsService implements AdsService
     public void showFullScreenBanner(final AdsListener adsListener)
     {
         if (!enable)
+        {
             adsListener.adsShowed(true);
+            return;
+        }
 
         activity.runOnUiThread(new Runnable()
         {
