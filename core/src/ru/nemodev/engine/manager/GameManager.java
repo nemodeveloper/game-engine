@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import ru.nemodev.engine.core.manager.GameStatus;
 import ru.nemodev.engine.core.manager.ScreenManager;
 import ru.nemodev.engine.core.manager.system.AppServiceManager;
+import ru.nemodev.engine.core.service.AdsService;
 import ru.nemodev.engine.core.util.InputUtils;
 import ru.nemodev.engine.screen.game.GameScreen;
 
@@ -83,14 +84,22 @@ public final class GameManager
                     {
                         isStartNewGame = true;
                         ++newGameCount;
-                        getScreenManager().popScreen();
-                        getScreenManager().pushScreen(new GameScreen());
 
                         if (newGameCount == 2)
                         {
                             newGameCount = 0;
-                            AppServiceManager.getInstance().getAdsService().showFullScreenBanner();
+                            AppServiceManager.getInstance().getAdsService().showFullScreenBanner(new AdsService.AdsListener()
+                            {
+                                @Override
+                                public void adsShowed(boolean showed)
+                                {
+
+                                }
+                            });
                         }
+
+                        getScreenManager().popScreen();
+                        getScreenManager().pushScreen(new GameScreen());
                     }
                     return true;
                 }

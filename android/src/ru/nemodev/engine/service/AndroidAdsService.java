@@ -41,21 +41,42 @@ public class AndroidAdsService implements AdsService
     }
 
     @Override
-    public boolean showFullScreenBanner()
+    public void showFullScreenBanner(final AdsListener adsListener)
     {
         if (!enable)
-            return false;
+            adsListener.adsShowed(true);
 
-        if (fullScreenBanner.isLoaded())
+        activity.runOnUiThread(new Runnable()
         {
-            fullScreenBanner.show();
-            return true;
-        }
-        else
-        {
-            loadNewFullscreenBanner();
-            return false;
-        }
+            @Override
+            public void run()
+            {
+                if (fullScreenBanner.isLoaded())
+                {
+                    fullScreenBanner.show();
+                    fullScreenBanner.setAdListener(new AdListener(){
+                        @Override
+                        public void onAdFailedToLoad(int i)
+                        {
+                            loadNewFullscreenBanner();
+                            adsListener.adsShowed(false);
+                        }
+
+                        @Override
+                        public void onAdClosed()
+                        {
+                            loadNewFullscreenBanner();
+                            adsListener.adsShowed(true);
+                        }
+                    });
+                }
+                else
+                {
+                    loadNewFullscreenBanner();
+                    adsListener.adsShowed(false);
+                }
+            }
+        });
     }
 
     @Override

@@ -3,9 +3,9 @@ package ru.nemodev.engine.core.service;
 public class MockAdsService implements AdsService
 {
     @Override
-    public boolean showFullScreenBanner()
+    public void showFullScreenBanner(final AdsListener adsListener)
     {
-        return true;
+        adsListener.adsShowed(true);
     }
 
     @Override
