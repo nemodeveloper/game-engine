@@ -3,7 +3,6 @@ package ru.nemodev.engine.scene.main;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.utils.viewport.Viewport;
 
 import ru.nemodev.engine.constant.GameConstant;
 import ru.nemodev.engine.constant.SoundConstant;
@@ -28,10 +27,9 @@ public class MainMenuScene extends BaseScene
 
     private RatingButton ratingButton;
 
-    public MainMenuScene(Viewport viewport, Batch batch)
+    public MainMenuScene( Batch batch)
     {
-        super(viewport, batch);
-
+        super(batch);
         init();
     }
 

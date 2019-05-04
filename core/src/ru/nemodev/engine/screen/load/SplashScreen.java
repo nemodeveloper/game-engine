@@ -1,7 +1,6 @@
 package ru.nemodev.engine.screen.load;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import ru.nemodev.engine.constant.SoundConstant;
 import ru.nemodev.engine.constant.texture.AtlasLoaderConstant;
@@ -11,11 +10,15 @@ import ru.nemodev.engine.core.manager.resource.PhysicManager;
 import ru.nemodev.engine.core.manager.resource.ResourceLoader;
 import ru.nemodev.engine.core.scene.BaseScene;
 import ru.nemodev.engine.core.screen.BaseLoaderScreen;
-import ru.nemodev.engine.core.util.ScreenUtils;
 import ru.nemodev.engine.core.util.SpriteUtils;
-import ru.nemodev.engine.manager.GameManager;
 import ru.nemodev.engine.entity.load.SplashActor;
+import ru.nemodev.engine.manager.GameManager;
 import ru.nemodev.engine.screen.main.MainScreen;
+
+import static ru.nemodev.engine.constant.GameConstant.CENTRE_X;
+import static ru.nemodev.engine.constant.GameConstant.CENTRE_Y;
+import static ru.nemodev.engine.constant.GameConstant.METERS_X;
+import static ru.nemodev.engine.constant.GameConstant.METERS_Y;
 
 public class SplashScreen extends BaseLoaderScreen
 {
@@ -25,11 +28,9 @@ public class SplashScreen extends BaseLoaderScreen
     {
         super();
 
-        BaseScene baseScene = new BaseScene(new ScreenViewport(), GameManager.getInstance().getSpriteBatch());
+        BaseScene baseScene = new BaseScene(GameManager.getInstance().getSpriteBatch());
 
-        splashActor = SpriteUtils.create(BackgroundTextureConstant.SPLASH);
-        splashActor.setSize(ScreenUtils.getWidth(), ScreenUtils.getHeight());
-        splashActor.setPosition(0, 0);
+        splashActor = SpriteUtils.create(BackgroundTextureConstant.SPLASH, METERS_X, METERS_Y, CENTRE_X, CENTRE_Y);
 
         baseScene.addGameObject(new SplashActor(splashActor));
 

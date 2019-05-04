@@ -1,17 +1,26 @@
 package ru.nemodev.engine.core.scene;
 
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.util.Iterator;
 
+import ru.nemodev.engine.constant.GameConstant;
 import ru.nemodev.engine.core.model.GameObject;
 
 public class BaseScene extends InputProcessorBase implements Scene
 {
     private final Batch batch;
+
+    public BaseScene(Batch batch)
+    {
+        this(new StretchViewport(GameConstant.METERS_X, GameConstant.METERS_Y,
+                new OrthographicCamera(GameConstant.METERS_X, GameConstant.METERS_Y)), batch);
+    }
 
     public BaseScene(Viewport viewport, Batch batch)
     {
@@ -26,9 +35,9 @@ public class BaseScene extends InputProcessorBase implements Scene
     }
 
     @Override
-    public Camera getCamera()
+    public OrthographicCamera getCamera()
     {
-        return viewport.getCamera();
+        return (OrthographicCamera) viewport.getCamera();
     }
 
     @Override
@@ -103,6 +112,25 @@ public class BaseScene extends InputProcessorBase implements Scene
     public void resize(int width, int height)
     {
         viewport.update(width, height, true);
+        updateCameraAfterResize(width, height);
+    }
+
+    protected void updateCameraAfterResize(int width, int height)
+    {
+        OrthographicCamera camera = getCamera();
+        if (GameConstant.ORIENTATION_PORTRAIT)
+        {
+            camera.viewportWidth = GameConstant.METERS_X;
+            camera.viewportHeight = GameConstant.METERS_Y * width / height;
+        }
+        else
+        {
+            camera.viewportWidth = GameConstant.METERS_X * height / width;
+            camera.viewportHeight = GameConstant.METERS_Y;
+        }
+
+        camera.position.set(GameConstant.CENTRE_X, GameConstant.CENTRE_Y, 0);
+        camera.update();
     }
 
     @Override

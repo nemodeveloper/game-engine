@@ -2,8 +2,6 @@ package ru.nemodev.engine.scene.main;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 
-import com.badlogic.gdx.utils.viewport.Viewport;
-
 import ru.nemodev.engine.core.scene.BaseScene;
 import ru.nemodev.engine.entity.game.background.BackgroundActor;
 import ru.nemodev.engine.manager.pool.PoolManager;
@@ -16,10 +14,9 @@ public class MainBackgroundScene extends BaseScene
 {
     private BackgroundActor backgroundActor;
 
-    public MainBackgroundScene(Viewport viewport, Batch batch)
+    public MainBackgroundScene(Batch batch)
     {
-        super(viewport, batch);
-
+        super(batch);
         init();
     }
 

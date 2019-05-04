@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
 import ru.nemodev.engine.constant.GameConstant;
 import ru.nemodev.engine.core.manager.GameStatus;
@@ -38,10 +37,7 @@ public class GameScreen extends BaseScreen
 
     private void initBackgroundScene(Batch batch)
     {
-        OrthographicCamera camera = new OrthographicCamera(GameConstant.METERS_X, GameConstant.METERS_Y);
-        camera.setToOrtho(false, GameConstant.METERS_X, GameConstant.METERS_Y);
-
-        gameBackgroundScene = new GameBackgroundScene(new ExtendViewport(GameConstant.METERS_X, GameConstant.METERS_Y, GameConstant.METERS_X, GameConstant.METERS_Y, camera), batch);
+        gameBackgroundScene = new GameBackgroundScene( batch);
         addScene(gameBackgroundScene);
     }
 
@@ -50,10 +46,7 @@ public class GameScreen extends BaseScreen
         OrthographicCamera camera = new OrthographicCamera(GameConstant.METERS_X, GameConstant.METERS_Y);
         camera.setToOrtho(false, GameConstant.METERS_X, GameConstant.METERS_Y);
 
-        gameScene = new GameScene(
-                new World(new Vector2(0.f, -9.81f), false),
-                new ExtendViewport(GameConstant.METERS_X, GameConstant.METERS_Y, GameConstant.METERS_X, GameConstant.METERS_Y, camera),
-                batch);
+        gameScene = new GameScene(new World(new Vector2(0.f, -9.81f), false), batch);
 
         addScene(gameScene);
     }
@@ -63,8 +56,7 @@ public class GameScreen extends BaseScreen
         OrthographicCamera camera = new OrthographicCamera(GameConstant.METERS_X, GameConstant.METERS_Y);
         camera.setToOrtho(false, GameConstant.METERS_X, GameConstant.METERS_Y);
 
-        gameUIScene = new GameUIScene(new ExtendViewport(GameConstant.METERS_X, GameConstant.METERS_Y, GameConstant.METERS_X, GameConstant.METERS_Y, camera), batch,
-                gameScene.getSoundEventListener());
+        gameUIScene = new GameUIScene(batch, gameScene.getSoundEventListener());
         addScene(gameUIScene);
     }
 

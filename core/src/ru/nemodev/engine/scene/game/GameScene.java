@@ -3,7 +3,6 @@ package ru.nemodev.engine.scene.game;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.utils.viewport.Viewport;
 
 import ru.nemodev.engine.constant.SoundConstant;
 import ru.nemodev.engine.core.listener.SoundEventListener;
@@ -21,10 +20,9 @@ public class GameScene extends Box2dScene
 {
     private Music musicBackground;
 
-    public GameScene(World world, Viewport viewport, Batch batch)
+    public GameScene(World world, Batch batch)
     {
-        super(world, viewport, batch);
-
+        super(world, batch);
         init();
     }
 
